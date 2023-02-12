@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [Controller::class, 'index']);
+Route::get('/semester-4', [Controller::class, 'index']);
