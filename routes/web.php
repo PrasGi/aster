@@ -14,4 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/aster-4', [Controller::class, 'index']);
+Route::get('/', [Controller::class, 'index']);
+Route::post('/send', [Controller::class, 'sendMessage']);

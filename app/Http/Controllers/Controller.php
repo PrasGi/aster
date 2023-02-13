@@ -7,6 +7,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Testing\Assert;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
@@ -117,5 +118,23 @@ class Controller extends BaseController
         ];
 
         return $data;
+    }
+
+    public function sendMessage(Request $request)
+    {
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'message' => 'required',
+            'phone' => 'required'
+        ]);
+
+        Mail::send('emails.ContactAster', ['request' => $request], function ($message) {
+            $message->to('prastyopratama01@gmail.com', 'Contact')
+                ->subject('Aster Contact');
+        });
+
+        return redirect('/');
     }
 }
